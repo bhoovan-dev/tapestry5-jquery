@@ -2,8 +2,8 @@ package org.got5.tapestry5.jquery.services;
 
 import org.apache.tapestry5.ClientElement;
 import org.apache.tapestry5.ComponentResources;
+import org.apache.tapestry5.commons.Location;
 import org.apache.tapestry5.internal.bindings.AbstractBinding;
-import org.apache.tapestry5.ioc.Location;
 import org.apache.tapestry5.runtime.Component;
 /**
  * 
@@ -19,9 +19,9 @@ public class SelectorBinding extends AbstractBinding {
 	private final String jqueryAlias;
 	
 	
-	public SelectorBinding(Location location, String description, ComponentResources componentResources, 
-			String value, RenderTracker selectorTracker,
-			 String alias) {
+	public SelectorBinding(Location location, String description, ComponentResources componentResources,
+						   String value, RenderTracker selectorTracker,
+						   String alias) {
 		super(location);
 		this.description = description;
 		this.tid = value;

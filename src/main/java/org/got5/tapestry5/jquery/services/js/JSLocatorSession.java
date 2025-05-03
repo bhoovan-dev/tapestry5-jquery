@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.tapestry5.services.Request;
-import org.apache.tapestry5.services.Session;
+import org.apache.tapestry5.http.services.Request;
+import org.apache.tapestry5.http.services.Session;
 
 /*
  * Locator that just uses the session. Simple enough and should work anywhere.
@@ -19,14 +19,14 @@ public class JSLocatorSession implements JSLocator {
 	}
 
 	public String store(final String script) {
-		Session session = request.getSession(true);	
+		Session session = request.getSession(true);
 		String key = createKey(script);
 		Integer max = 0;
 		if ( session.getAttribute(key) != null ) {
 			List<String> names = session.getAttributeNames(prefix);
 			for ( String name : names ) {
 				String[] parts = name.split("-");
-				Integer seq = new Integer(parts[1]);
+				Integer seq = Integer.valueOf(parts[1]);
 				if ( seq > max ) {
 					max = seq;
 				}

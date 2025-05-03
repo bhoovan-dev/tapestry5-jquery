@@ -14,7 +14,6 @@
 
 package org.got5.tapestry5.jquery.components;
 
-import static org.apache.tapestry5.ioc.internal.util.CollectionFactory.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -42,6 +41,7 @@ import org.apache.tapestry5.annotations.Environmental;
 import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.commons.util.CollectionFactory;
 import org.apache.tapestry5.corelib.base.AbstractField;
 import org.apache.tapestry5.corelib.components.Checklist;
 import org.apache.tapestry5.corelib.components.Form;
@@ -49,11 +49,10 @@ import org.apache.tapestry5.corelib.components.Select;
 import org.apache.tapestry5.internal.util.SelectModelRenderer;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.Symbol;
-import org.apache.tapestry5.ioc.internal.util.CollectionFactory;
 import org.apache.tapestry5.json.JSONArray;
 import org.apache.tapestry5.json.JSONObject;
 import org.apache.tapestry5.services.ComponentDefaultProvider;
-import org.apache.tapestry5.services.Request;
+import org.apache.tapestry5.http.services.Request;
 import org.apache.tapestry5.services.javascript.JavaScriptSupport;
 
 /**
@@ -357,7 +356,7 @@ public class Palette extends AbstractField
         List<Object> selected = this.selected;
 
         if (selected == null)
-            selected = newList();
+            selected = CollectionFactory.newList();
         else
             selected.clear();
 
@@ -448,7 +447,7 @@ public class Palette extends AbstractField
         renderer = new SelectModelRenderer(writer, encoder, compactJSON);
 
         @SuppressWarnings("rawtypes")
-		final Set selectedSet = newSet(getSelected());
+		final Set selectedSet = CollectionFactory.newSet(getSelected());
 
         SelectModelVisitor visitor = new SelectModelVisitor()
         {

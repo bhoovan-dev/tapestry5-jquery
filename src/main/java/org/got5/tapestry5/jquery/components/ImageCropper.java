@@ -15,14 +15,14 @@
 //
 package org.got5.tapestry5.jquery.components;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.apache.tapestry5.Asset;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.ClientElement;
 import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.EventConstants;
-import org.apache.tapestry5.Link;
+import org.apache.tapestry5.http.Link;
 import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.annotations.AfterRender;
 import org.apache.tapestry5.annotations.BeforeRenderBody;

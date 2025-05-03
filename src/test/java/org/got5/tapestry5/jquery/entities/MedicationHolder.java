@@ -16,10 +16,11 @@
 
 package org.got5.tapestry5.jquery.entities;
 
+import org.apache.tapestry5.beaneditor.NonVisual;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.tapestry5.beaneditor.NonVisual;
 
 public class MedicationHolder
 {

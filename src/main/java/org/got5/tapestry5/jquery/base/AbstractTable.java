@@ -9,7 +9,6 @@ import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.Block;
 import org.apache.tapestry5.ClientElement;
 import org.apache.tapestry5.ComponentResources;
-import org.apache.tapestry5.PropertyConduit;
 import org.apache.tapestry5.PropertyOverrides;
 import org.apache.tapestry5.Translator;
 import org.apache.tapestry5.annotations.Parameter;
@@ -17,22 +16,24 @@ import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SetupRender;
 import org.apache.tapestry5.annotations.SupportsInformalParameters;
-import org.apache.tapestry5.beaneditor.BeanModel;
-import org.apache.tapestry5.beaneditor.PropertyModel;
+import org.apache.tapestry5.beanmodel.BeanModel;
+import org.apache.tapestry5.beanmodel.BeanModelUtils;
+import org.apache.tapestry5.beanmodel.PropertyConduit;
+import org.apache.tapestry5.beanmodel.PropertyModel;
+import org.apache.tapestry5.beanmodel.services.BeanModelSource;
+import org.apache.tapestry5.commons.Messages;
+import org.apache.tapestry5.commons.util.CollectionFactory;
 import org.apache.tapestry5.corelib.data.GridPagerPosition;
 import org.apache.tapestry5.grid.ColumnSort;
 import org.apache.tapestry5.grid.GridDataSource;
 import org.apache.tapestry5.grid.GridSortModel;
 import org.apache.tapestry5.grid.SortConstraint;
 import org.apache.tapestry5.internal.TapestryInternalUtils;
-import org.apache.tapestry5.internal.beaneditor.BeanModelUtils;
 import org.apache.tapestry5.internal.bindings.AbstractBinding;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.apache.tapestry5.ioc.internal.util.CollectionFactory;
 import org.apache.tapestry5.ioc.internal.util.InternalUtils;
-import org.apache.tapestry5.ioc.services.TypeCoercer;
-import org.apache.tapestry5.services.BeanModelSource;
-import org.apache.tapestry5.services.Request;
+import org.apache.tapestry5.commons.services.TypeCoercer;
+import org.apache.tapestry5.http.services.Request;
 import org.apache.tapestry5.services.TranslatorSource;
 import org.apache.tapestry5.services.javascript.JavaScriptSupport;
 import org.got5.tapestry5.jquery.internal.TableInformation;
@@ -89,7 +90,7 @@ public class AbstractTable implements ClientElement {
 
 	/**
 	 * A comma-seperated list of property names to be added to the
-	 * {@link org.apache.tapestry5.beaneditor.BeanModel}. Cells for added
+	 * {@link org.apache.tapestry5.beanmodel.BeanModel}. Cells for added
 	 * columns will be blank unless a cell override is provided. This parameter
 	 * is only used when a default model is created automatically.
 	 */
@@ -104,7 +105,7 @@ public class AbstractTable implements ClientElement {
 	private PropertyOverrides overrides;
 	/**
 	 * A comma-separated list of property names to be retained from the
-	 * {@link org.apache.tapestry5.beaneditor.BeanModel}. Only these properties
+	 * {@link org.apache.tapestry5.beanmodel.BeanModel}. Only these properties
 	 * will be retained, and the properties will also be reordered. The names
 	 * are case-insensitive. This parameter is only used when a default model is
 	 * created automatically.
@@ -115,7 +116,7 @@ public class AbstractTable implements ClientElement {
 
 	/**
 	 * A comma-separated list of property names to be removed from the
-	 * {@link org.apache.tapestry5.beaneditor.BeanModel} . The names are
+	 * {@link org.apache.tapestry5.beanmodel.BeanModel} . The names are
 	 * case-insensitive. This parameter is only used when a default model is
 	 * created automatically.
 	 */
@@ -312,8 +313,7 @@ public class AbstractTable implements ClientElement {
 	 * may override to provide a different mechanism. The returning binding is
 	 * variant (not invariant).
 	 *
-	 * @see BeanModelSource#createDisplayModel(Class,
-	 *      org.apache.tapestry5.ioc.Messages)
+	 * @see BeanModelSource#createDisplayModel(Class, Messages)
 	 *
 	 * @return {@link org.apache.tapestry5.Binding}
 	 */
@@ -474,7 +474,7 @@ public class AbstractTable implements ClientElement {
 
 				return new Iterator<Integer>() {
 
-					Integer i = new Integer(0);
+					Integer i = 0;
 
 					public boolean hasNext() {
 						return i < getSource().getAvailableRows();

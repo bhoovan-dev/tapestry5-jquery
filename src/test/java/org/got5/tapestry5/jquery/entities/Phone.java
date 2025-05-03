@@ -16,11 +16,12 @@
 
 package org.got5.tapestry5.jquery.entities;
 
-import java.util.Date;
-
 import org.apache.tapestry5.beaneditor.NonVisual;
 import org.apache.tapestry5.beaneditor.Validate;
 import org.apache.tapestry5.beaneditor.Width;
+
+import java.util.Date;
+
 
 public class Phone
 {
